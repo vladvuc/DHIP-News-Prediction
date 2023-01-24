@@ -2,7 +2,7 @@
 
 ## Working title: What makes people click?
 
-This repository for now contains only data which was used for the project for subject **Digital Humanities in Practice** at *Vrije Universiteit in Amsterdam* in period 3.
+This repository for now contains only data which were used for the project for subject **Digital Humanities in Practice** at *Vrije Universiteit in Amsterdam* in period 3.
 
 Students: 
 - Shanet Richardson
