@@ -4,46 +4,69 @@ author: "Shanet"
 date: "2023-01-22"
 output: html_document
 ---
+
 ```{r}
 library(dplyr)
 library(ggplot2)
 library(ggthemes)
 library(ggrepel)
+library(stringr)
 ```
 
 ```{r}
-df=read.csv("indexedwtext_ner.csv")
-df2=read.csv("GroupedwoTIME.csv")
-df3=read.csv("GroupedwTIME.csv")
+df=read.csv("GroupedwTIME.csv")
 ```
 
 ```{r}
-ggplot(df3,aes(x=Label,y=Clicks))+
+ggplot(df,aes(x=Label,y=Clicks))+
   geom_point()+
   coord_flip()+
   theme_classic()+
-  ggtitle("Mean amount of clicks by NER label")+
+  labs(title= "Click through rate for different NER labels", subtitle ="Labels have been grouped and use their averages")+
      annotate('text', x = 9, y = 325, label = '310')+
   annotate('text', x = 13, y = 460, label = '445')+
   annotate('text', x = 16, y = 490, label = '472')
 ```
+
 ```{r}
-df$Length<-df$Label
-df$Label <- str_count(df$Headline)
-
-df <- df[!duplicated(df$Headline), ]
-
-df5 <- df[,-c(1,2,3,6,7)]
-
+lengthdata <- read.csv("lengthcoded.csv")
+pageviews <- read.csv("googleviews.csv")
+pageviews$Day.Index <- as.Date(pageviews$Day.Index, format = "%m/%d/%y")
+pageviews$Pageviews <- gsub(",","",pageviews$Pageviews)
+pageviews$Pageviews <- as.numeric(pageviews$Pageviews)
 ```
 
 ```{r}
-ggplot(df5,aes(x=Length))+
-  geom_histogram()+
-  #geom_line(aes(x=Length,y=Clicks),colour="blue")+
-  #geom_bar(stat="identity",color="black")+
-  ggtitle("Headline length vs. amount of Clicks")+
-  theme_bw()+
-  scale_x_continuous(limits=c(25,115))
+subsetted <- subset(lengthdata, Length > 25)
+subsetted2 <- subset(subsetted, Length < 110)
 ```
+
+
+```{r}
+ggplot(subsetted2)+
+  geom_bar(aes(x=Length,alpha =0.1), fill = "slateblue3") + 
+  scale_x_continuous(breaks = seq(from = 30, to = 110, by = 20)) + geom_smooth(aes(x=Length,y=Clicks),colour="orange", linewidth = 2) + scale_y_log10() +
+  labs(title = "Click through rate for headline lengths", y = "log10(Clicks)", subtitle = "Click rate logarithmically transformed for trend analysis")+
+  theme_bw() + theme(legend.position = "NONE") 
+```
+```{r}
+df = read.csv("punct_text_ner.csv", sep = ';')
+```
+
+```{r}
+max(df$count_punct)
+```
+
+
+```{r}
+ggplot(df, 
+       aes(x = count_punct, y = clicks)) +
+  geom_bar(stat = "identity",position="dodge", fill = "slateblue3", alpha = 0.3) + scale_x_continuous(breaks = seq(0,23, by = 1)) + 
+  labs(title = "Click through rate for punctuation frequencies",
+       x = "Number of punctuation characters",
+       y = 'Clicks', subtitle = "Density of colours used as measure of click rate frequency") + theme_classic()
+```
+
+
+
 
