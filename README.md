@@ -20,7 +20,7 @@ Students:
 - [x] Impression/Clicks RQ and discussion
 - [x] Visualizations
 - [ ] Recording of Video
-- [ ] Poster
+- [x] Poster
 - [ ] Final submission
 
 
