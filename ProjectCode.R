@@ -6,6 +6,10 @@ library(ggthemes)
 library(lme4)
 library(sjPlot)
 
+# Plot width and height (in inches)
+plot_w = 7.5
+plot_h = 4.4
+
 # Plotting Entity label click rates
 
 lengthdata = read.csv("data/GroupedwTIME.csv")
@@ -21,7 +25,8 @@ labelplot <- ggplot(lengthdata,aes(x=Label,y=Clicks))+
 
 labelplot
 
-ggsave("plots/1-labelclicks.png",labelplot, bg="transparent", dpi = 300)
+ggsave("plots/1-labelclicks.png", labelplot, width = plot_w, height = plot_h,
+       bg="transparent", dpi = 200)
 
 # Headline lengths vs clicks
 
@@ -38,7 +43,8 @@ lengthplot <- ggplot(subsetted2)+
 
 lengthplot
 
-ggsave("plots/2-lengthclicks.png",lengthplot, bg="transparent", dpi = 300)
+ggsave("plots/2-lengthclicks.png",lengthplot, width = plot_w, height = plot_h,
+       bg="transparent", dpi = 200)
 
 # Headline punctuations vs clicks
 
@@ -51,7 +57,8 @@ punctplot <- ggplot(punctdata,
 
 punctplot
 
-ggsave("plots/3-punctclicks.png",punctplot, bg="transparent", dpi = 300)
+ggsave("plots/3-punctclicks.png", punctplot, width = plot_w, height = plot_h,
+       bg="transparent", dpi = 200)
 
 # Entity existence regression
 
