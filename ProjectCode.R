@@ -8,9 +8,9 @@ library(sjPlot)
 
 # Plotting Entity label click rates
 
-lengthdata = read.csv("/data/GroupedwTIME.csv")
+lengthdata = read.csv("data/GroupedwTIME.csv")
 
-labelplot <- ggplot(df,aes(x=Label,y=Clicks))+
+labelplot <- ggplot(lengthdata,aes(x=Label,y=Clicks))+
   geom_point()+
   coord_flip()+
   theme_classic()+
@@ -21,11 +21,11 @@ labelplot <- ggplot(df,aes(x=Label,y=Clicks))+
 
 labelplot
 
-ggsave("labelclicks.png",labelplot, bg="transparent", dpi = 300)
+ggsave("plots/1-labelclicks.png",labelplot, bg="transparent", dpi = 300)
 
 # Headline lengths vs clicks
 
-lengthdata <- read.csv("/data/lengthcoded.csv")
+lengthdata <- read.csv("data/lengthcoded.csv")
 
 subsetted <- subset(lengthdata, Length > 25)
 subsetted2 <- subset(subsetted, Length < 110)
@@ -38,25 +38,24 @@ lengthplot <- ggplot(subsetted2)+
 
 lengthplot
 
-ggsave("lengthclicks.png",lengthplot, bg="transparent", dpi = 300)
+ggsave("plots/2-lengthclicks.png",lengthplot, bg="transparent", dpi = 300)
 
 # Headline punctuations vs clicks
 
-punctdata = read.csv("../data/punct_text_ner.csv", sep = ';')
+punctdata = read.csv("data/punct_text_ner.csv", sep = ';')
 
-punctplot <- ggplot(df, 
+punctplot <- ggplot(punctdata, 
   aes(x = count_punct, y = clicks)) +
   geom_bar(stat = "identity",position="dodge", fill = "slateblue3", alpha = 0.3) + scale_x_continuous(breaks = seq(0,23, by = 1)) + 
-  labs(title = "Click through rate for punctuation frequencies", x = "Number of punctuation characters", y = 'Clicks', subtitle = "Density of colours used as measure of click rate frequency")
-  + theme_classic()
+  labs(title = "Click through rate for punctuation frequencies", x = "Number of punctuation characters", y = 'Clicks', subtitle = "Density of colours used as measure of click rate frequency") + theme_classic()
 
 punctplot
 
-ggsave("punctclicks.png",punctplot, bg="transparent", dpi = 300)
+ggsave("plots/3-punctclicks.png",punctplot, bg="transparent", dpi = 300)
 
 # Entity existence regression
 
-entityexistence <- read.csv("/data/contains_entities.csv")
+entityexistence <- read.csv("data/contains_entities.csv")
 
 multientity <- lmer(clicks ~ contains_entity + (1 + contains_entity | test_id), data = entityexistence)
 
@@ -64,7 +63,7 @@ tab_model(multientity)
 
 # Label regression
 
-typesframe <- read.csv("/data/typesner.csv")
+typesframe <- read.csv("data/typesner.csv")
 
 multitypes <- lmer(Clicks ~ ORG + DATE + PERSON + GPE + LOC + MONEY + TIME + PRODUCT + QUANTITY + EVENT + FAC + LANGUAGE + LAW + NORP + PERCENT + WORK_OF_ART + (1 | Test_id), data = typesframe)
 
