@@ -14,11 +14,11 @@ Students:
 - [x] Inter-annotator comparison and agreement
 - [x] Presentation Week 3
 - [ ] Submitting Draft of the Report
-- [ ] Named Entities Results discussion
+- [x] Named Entities Results discussion
 - [ ] Different types of entities RQ/results discussion
-- [ ] Length of headlines RQ / Results discussion
-- [ ] Impression/Clicks RQ and discussion
-- [ ] Visualizations
+- [x] Length of headlines RQ / Results discussion
+- [x] Impression/Clicks RQ and discussion
+- [x] Visualizations
 - [ ] Recording of Video
 - [ ] Poster
 - [ ] Final submission
