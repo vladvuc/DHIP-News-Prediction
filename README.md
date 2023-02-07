@@ -19,9 +19,9 @@ Students:
 - [x] Impression/Clicks RQ and discussion
 - [x] Visualizations
 - [x] Poster
-- [ ] Submitting Draft of the Report
-- [ ] Recording of Video
-- [ ] Final submission
+- [x] Submitting Draft of the Report
+- [x] Recording of Video
+- [x] Final submission
 
 
 
